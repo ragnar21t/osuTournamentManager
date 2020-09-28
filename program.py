@@ -4,6 +4,7 @@ from tkinter import ttk
 import json
 import os
 import tournamentManager
+import tabManager
 
 def changeTournamentFolderPath():
 
@@ -68,7 +69,7 @@ tabControl = ttk.Notebook(mainWindow)
 tab = ttk.Frame(tabControl)
 
 # Create tabs with tourney names
-tournamentManager.tabs(tournamentPathFolder, tabControl)
+tabManager.tabs(tournamentPathFolder, tabControl)
 
 tabControl.pack(expand=1, fill="both")
 

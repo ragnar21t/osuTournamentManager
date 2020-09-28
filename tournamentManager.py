@@ -1,7 +1,6 @@
 import json
 from tkinter import filedialog
 import tkinter as tk
-from tkinter import ttk
 from pathlib import Path
 import os
 
@@ -48,9 +47,9 @@ def createTournament(root, tabControl):
     teamsSizeEntry.grid(row=2, column=1)
 
     frame.pack()
-    tk.Button(createTournamentWindow, text="Create", command = lambda: storeTournamentData(tournamentData, tournamentNameEntry, tournamentAcronymEntry, teamsSizeEntry, tabControl, createTournamentWindow)).pack()
+    tk.Button(createTournamentWindow, text="Create", command = lambda: storeTournamentData(tournamentData, tournamentNameEntry, tournamentAcronymEntry, teamsSizeEntry, createTournamentWindow)).pack()
 
-def storeTournamentData(tournamentData, tournamentNameEntry, tournamentAcronymEntry, teamsSizeEntry, tabControl, topRoot):
+def storeTournamentData(tournamentData, tournamentNameEntry, tournamentAcronymEntry, teamsSizeEntry, topRoot):
     # Capturing data
     tournamentName = tournamentNameEntry.get()
     tournamentAcronym = tournamentAcronymEntry.get()
@@ -77,9 +76,3 @@ def storeTournamentData(tournamentData, tournamentNameEntry, tournamentAcronymEn
     tournamentJson = open(f"{tournamentPathFolder}/{nameWithoutSpaces}/{nameWithoutSpaces}.json" , "x")
     tournamentJson.write(jsonData)
     tournamentJson.close()
-
-def tabs(path, tabControl):
-    tournamentList = [f for f in os.listdir(path)]
-    for f in tournamentList:
-        tab = ttk.Frame(tabControl)
-        tabControl.add(tab, text=f"{f}")
