@@ -40,7 +40,6 @@ class Window:
         root.mainloop()
 
     def checkConfigFile(self):
-
         # This function exists just to check if config.json exists. 
         # That file right now doesnt do anything but who knows...
 
@@ -64,6 +63,8 @@ class Window:
             self.addToConfigFile(configFileJson)
             with open("./config.json") as configFile:
                 fileLoad = json.load(configFile)
+
+        return tournamentdbPath
     
     def checkTournamentDB(self):
         # We check if the database exists. If it doesn't, we create one
@@ -87,11 +88,32 @@ class Window:
 
     def createTournament(self, root, dbFile):
         creationWindow = tk.Toplevel(root)
-        creationWindow.title("Tournament Creation")
-        creationWindow.geometry("300x90")
+        creationWindow.title("Tournament Data")
+        creationWindow.geometry("300x120")
         creationWindow.attributes("-topmost", True)
         creationWindow.after(1, lambda : creationWindow.focus_force())
         creationWindow.resizable(0 , 0) # Not Resizable
+        creationWindow.wm_attributes('-toolwindow', 1)
+        creationWindow.rowconfigure(3, weight=1)
+        creationWindow.columnconfigure(1, weight=1)
+
+        #Labels
+        tk.Label(creationWindow, text="Tournament Name: ").grid(pady=2.5, padx=2.5, row=0, column=0)
+        tk.Label(creationWindow, text="Acronym (OWC, SFT...): ").grid(pady=2.5 , padx=2.5, row=1, column=0)
+        tk.Label(creationWindow, text="Teams Size (1 -> 8):  ").grid(pady=2.5, padx=2, row=2, column=0)
+
+        # Entries
+        tournamentName = tk.Entry(creationWindow, width="30")
+        tournamentName.grid(row=0, column=1, sticky="e", padx=5)
+
+        tournamentAcronym = tk.Entry(creationWindow, width="30")
+        tournamentAcronym.grid(row=1, column=1, sticky="e", padx=5)
+
+        teamSize = tk.Spinbox(creationWindow, from_=1, to=8, width="30")
+        teamSize.grid(row=2, column=1, sticky="e", padx=5)
+
+        sendData = tk.Button(creationWindow, text="Submit", command = lambda : tournament.Tournament(tournamentName, tournamentAcronym, teamSize, "tournament.json"))
+        sendData.grid(padx=7.5, row=3, columnspan=2, sticky="e")
 
     def generateTabs(self):
         pass
