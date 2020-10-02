@@ -112,6 +112,7 @@ class Window:
         teamSize = tk.Spinbox(creationWindow, from_=1, to=8, width="30")
         teamSize.grid(row=2, column=1, sticky="e", padx=5)
 
+        # Submit button
         sendData = tk.Button(creationWindow, text="Submit", command = lambda : tournament.Tournament(tournamentName, tournamentAcronym, teamSize, "tournament.json"))
         sendData.grid(padx=7.5, row=3, columnspan=2, sticky="e")
 
